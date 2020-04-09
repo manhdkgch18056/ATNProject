@@ -24,5 +24,6 @@ app.use(favicon(__dirname + '/public/images/logo.png'));
 app.use('/index', indexController);
 app.use('/sanpham', SanPhamController);
 
-var server = app.listen(5000, function () {
+var server = app.listen(8000, function () {
+    console.log("Running at port 8000 ")
 });

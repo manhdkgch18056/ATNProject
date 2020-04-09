@@ -17,29 +17,31 @@
 
 
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="/SanPham"><span class="fas fa-home"></span>&nbsp; &nbsp;ATN Website</a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="/SanPham/insert">Insert</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/Sanpham/search">Search</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-    </ul>
-    <form class="form-inline " action="/SanPham/search" method="POST">
-        <input class="form-control mr-sm-2" type="text" name="product_name" placeholder="Search">
-        <button class="btn btn-success" type="submit">Search</button>
-    </form>
-</nav>
+<div class="container">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/SanPham"><span class="fas fa-home"></span>&nbsp; &nbsp;ATN Website</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/SanPham/insert">Insert</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Sanpham/search">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline " action="/SanPham/search" method="POST">
+            <input class="form-control mr-sm-2" type="text" name="product_name" placeholder="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+    </nav>
+</div>
 <div class="container">
     <table class="table table-bordered">
         <thead>
@@ -60,7 +62,7 @@
                 <td>{{[price]}}</td>
                 <td>
                     <a href="/SanPham/edit?id={{_id}}" class="btn btn-primary">Udpate</a>
-                    <a href="/SanPham/delete?id={{_id}}" class="btn btn-danger">Delete</a>
+                    <a href="/SanPham/delete?id={{_id}}" class="btn btn-danger" method="POST">Delete</a>
                 </td>
             </tr>
             </tbody>

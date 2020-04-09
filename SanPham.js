@@ -21,6 +21,17 @@ router.post('/search', async (req, res) => {
         res.render('allSanPham', {products: results})
     }
 )
+
+router.get('/delete', async (req,res)=>{
+    let id = req.query.id;
+    var ObjectID = require('mongodb').ObjectID;
+
+    let client = await MongoClient.connect(url);
+    let dbo = client.db("ATNDatabase");
+    await dbo.collection("products").deleteOne({"_id": ObjectID(id)});
+    let results = await dbo.collection("products").find({}).toArray();
+    res.render('allSanPham', {products: results})
+})
 router.get('/edit', async (req, res) => {
     let id = req.query.id;
     var ObjectID = require('mongodb').ObjectID;
@@ -33,6 +44,7 @@ router.get('/edit', async (req, res) => {
 
 router.post('/edit', async (req, res) => {
     let id = req.body.id;
+    console.log("ID "+id);
     let product_name = req.body.product_name;
     let price = req.body.price;
     let color = req.body.color;
@@ -42,8 +54,7 @@ router.post('/edit', async (req, res) => {
 
     let client = await MongoClient.connect(url);
     let dbo = client.db("ATNDatabase");
-    debug1= await dbo.collection("products").updateOne(condition, newValues);
-    console.log(debug1);
+    await dbo.collection("products").updateOne(condition, newValues);
     let results = await dbo.collection("products").find({}).toArray();
     res.render('allSanPham', {products: results});
 })
