@@ -1,6 +1,7 @@
 const express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
 
 var url = 'mongodb+srv://manhdkgch18056:DaoKhacManh00@cluster0-pyltn.mongodb.net/test?retryWrites=true&w=majority';
 
@@ -15,17 +16,17 @@ router.get('/search', async (req, res) => {
 })
 router.post('/search', async (req, res) => {
         let searchProduct = req.body.product_name;
+        console.log(searchProduct);
         let client = await MongoClient.connect(url);
         let dbo = client.db("ATNDatabase");
-        let results = await dbo.collection("products").find({"product_name": searchProduct}).toArray();
+        let results = await dbo.collection("products").find({product_name:searchProduct}).toArray();
         res.render('allSanPham', {products: results})
     }
 )
 
-router.get('/delete', async (req,res)=>{
+router.get('/delete', async (req, res) => {
     let id = req.query.id;
     var ObjectID = require('mongodb').ObjectID;
-
     let client = await MongoClient.connect(url);
     let dbo = client.db("ATNDatabase");
     await dbo.collection("products").deleteOne({"_id": ObjectID(id)});
@@ -44,7 +45,7 @@ router.get('/edit', async (req, res) => {
 
 router.post('/edit', async (req, res) => {
     let id = req.body.id;
-    console.log("ID "+id);
+    console.log("ID " + id);
     let product_name = req.body.product_name;
     let price = req.body.price;
     let color = req.body.color;
@@ -63,6 +64,7 @@ router.get('/insert', async (req, res) => {
         res.render('insertSanPham');
     }
 )
+
 router.post('/insert', async (req, res) => {
 
     var insertSP = {
@@ -71,16 +73,26 @@ router.post('/insert', async (req, res) => {
         color: req.body.color,
         price: req.body.price
     };
+    var formidable = require('formidable');
+    var fs = require('fs');
+    if (req.url == '/insert') {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+            var oldpath = files.filetoupload.path; console.log("Oldpath: " +oldpath);
+            var newpath = 'public/images/' + files.filetoupload.name;console.log("Newpath: " +newpath);
+            fs.rename(oldpath, newpath, function (err) {
+                if (err) throw err;
+                res.write('File uploaded and moved!');
+                res.end();
+            });
+        });
+    }
     let client = await MongoClient.connect(url);
     let dbo = client.db("ATNDatabase");
     await dbo.collection("products").insertOne(insertSP);
     let result2 = await dbo.collection("products").find({}).toArray();
-    res.render('allSanPham',{products: result2})
-    })
-router.get('/edit/:id', async (req, res) => {
-        res.render('edit');
-    }
-)
+    res.render('allSanPham', {products: result2});
+})
 
 
 module.exports = router;
