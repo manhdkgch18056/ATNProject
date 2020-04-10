@@ -11,7 +11,12 @@
     "url": "git+https://github.com/manhdkgch18056/ATNProject.git"
   },
 
-  "dependencies": {
+  "bugs": {
+    "url": "https://github.com/manhdkgch18056/ATNProject/issues"
+  },
+  "homepage": "https://github.com/manhdkgch18056/ATNProject#readme",
+
+"dependencies": {
     "consolidate": "^0.15.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
