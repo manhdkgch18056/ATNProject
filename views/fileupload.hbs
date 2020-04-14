@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,9 +5,49 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Manage products</title>
 </head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
 <body>
-
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="/products"><span class="fas fa-home"></span>&nbsp;</a>
+        </li>
+        <li class="navbar-nav active">
+            <div class="nav-link">ATN</div>
+        </li> &nbsp;
+        <li class="nav-item ">
+            <a class="nav-link" href="/products/insert">Insert</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/products/search">Search</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/products/login">Log In</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+    </ul>
+    <form class="form-inline " action="/products/search" method="POST">
+        <input class="form-control mr-sm-2" type="text" name="product_name" placeholder="Search">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </form>
+</nav>
+<div class="container">
+    <div class="form-group">
+        <form action="/upload/uploadphoto" enctype="multipart/form-data" method="POST">
+            <label for="fileupload">Upload file: </label>
+            <input type="file" name="picture" class="form-control" accept="image/*" />
+        </form>
+    </div>
+</div>
 </body>
 </html>
