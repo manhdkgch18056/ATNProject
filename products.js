@@ -62,13 +62,25 @@ router.get('/edit', async (req, res) => {
     res.render('edit', {products: result});
 });
 
-router.post('/edit', async (req, res) => {
+router.post('/edit', upload.single('picture'), async (req, res) => {
+    var img = fs.readFileSync(req.file.path);
+    var encode_image = img.toString('base64');
     let id = req.body.id;
     console.log("ID " + id);
     let product_name = req.body.product_name;
     let price = req.body.price;
     let color = req.body.color;
-    let newValues = {$set: {product_name: product_name, color: color, price: price}};
+    let contentType = req.file.mimetype;
+    image = new Buffer(encode_image, 'base64');
+    let newValues = {
+        $set: {
+            product_name: product_name,
+            color: color,
+            price: price,
+            contentType: contentType,
+            image: image
+        }
+    };
     var ObjectID = require('mongodb').ObjectID;
     let condition = {"_id": ObjectID(id)};
 
@@ -80,11 +92,12 @@ router.post('/edit', async (req, res) => {
 });
 
 router.get('/insert', async (req, res) => {
-        res.render('insertSanPham');
-    });
+    res.render('insertSanPham');
+});
 
-router.post('/insert',upload.single('picture'), async (req, res) => {
+router.post('/insert', upload.single('picture'), async (req, res) => {
     var img = fs.readFileSync(req.file.path);
+    console.log("img: "+img);
     var encode_image = img.toString('base64');
 
     var insertProducts = {
@@ -97,28 +110,15 @@ router.post('/insert',upload.single('picture'), async (req, res) => {
     };
     let client = await MongoClient.connect(url);
     let dbo = client.db("ATNDatabase");
-    await dbo.collection("products").insertOne(insertProducts, (err, result)=>{
+    await dbo.collection("products").insertOne(insertProducts, (err, result) => {
         console.log(result)
         if (err) return console.log(err)
         console.log('saved to database')
     });
     let result2 = await dbo.collection("products").find({}).toArray();
     res.render('allProducts', {products: result2});
-
 });
 
-router.get('/uploadphoto', async (req, res)=>{
-    res.render('upload.hbs');
-});
-router.post('/uploadphoto', upload.single('picture'), (req, res) => {
-
-});
-router.get('/viewAllPhotos', async (req, res) => {
-    let client = await MongoClient.connect(url);
-    let dbo = client.db("ATNDatabase");
-    let results = await dbo.collection("products").find({}).toArray();
-    res.render('allProducts', {photo: results});
-});
 router.get('/photos', (req, res) => {
     db.collection('products').find().toArray((err, result) => {
         const imgArray = result.map(element => element._id);
@@ -127,6 +127,7 @@ router.get('/photos', (req, res) => {
         res.send(imgArray)
     })
 });
+
 router.get('/photos/:id', (req, res) => {
     var filename = req.params.id;
     db.collection('products').findOne({'_id': ObjectId(filename)}, (err, result) => {

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,6 +16,7 @@
   "homepage": "https://github.com/manhdkgch18056/ATNProject#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap": "^3.4.1",
     "consolidate": "^0.15.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -35,5 +36,8 @@
   "main": "products.js",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
