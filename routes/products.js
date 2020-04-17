@@ -32,16 +32,6 @@ router.get('/', async (req, res) => {
     res.render('allProducts', {products: results});
 });
 
-router.post('/search', async (req, res) => {
-        let searchProduct = req.body.product_name;
-        console.log(searchProduct);
-        let client = await MongoClient.connect(url);
-        let dbo = client.db("ATNDatabase");
-        let results = await dbo.collection("products").find({product_name: searchProduct}).toArray();
-        res.render('allProducts', {products: results})
-    }
-);
-
 router.get('/delete', async (req, res) => {
     let id = req.query.id;
     var ObjectID = require('mongodb').ObjectID;
@@ -92,7 +82,7 @@ router.post('/edit', upload.single('picture'), async (req, res) => {
 });
 
 router.get('/insert', async (req, res) => {
-    res.render('insertSanPham');
+    res.render('insert');
 });
 
 router.post('/insert', upload.single('picture'), async (req, res) => {
@@ -111,7 +101,6 @@ router.post('/insert', upload.single('picture'), async (req, res) => {
     let client = await MongoClient.connect(url);
     let dbo = client.db("ATNDatabase");
     await dbo.collection("products").insertOne(insertProducts, (err, result) => {
-        console.log(result)
         if (err) return console.log(err)
         console.log('saved to database')
     });

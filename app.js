@@ -8,16 +8,13 @@ const PORT = process.env.PORT || 8000
 app.use(bodyParser.urlencoded({extended: false}));
 var publicDir = require('path').join(__dirname, '/public');
 
-//npm i handlebars consolidate --save
 app.engine('hbs', engines.handlebars);
 app.set('views', './views');
 app.set('view engine', 'hbs');
 
-var indexController = require('./index.js');
-var productsController = require('./products.js');
+var productsController = require('./routes/products.js');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
-app.use('/index', indexController);
 app.use('/products', productsController);
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 

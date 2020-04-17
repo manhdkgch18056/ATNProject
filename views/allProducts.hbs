@@ -19,21 +19,15 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="/products"><span class="fas fa-home"></span>&nbsp;</a>
+            <a class="nav-link" href="/products"><h2><span class="fas fa-home"></span>&nbsp;</h2></a>
         </li>
-        <li class="navbar-nav active"><div class="nav-link">ATN</div></li> &nbsp;
-        <li class="nav-item ">
-            <a class="nav-link" href="/products/insert">Insert</a>
+        <li class="navbar-nav active"><div class="nav-link"><h2>ATN Management &nbsp;</h2></div></li> &nbsp;
+        <li class="nav-item mt-lg-2">
+            <a class="btn btn-outline-secondary" href="/products/insert">Insert</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/products/search">Search</a>
-        </li>
-        <li class="nav-item">
+<!--        <li class="nav-item">
             <a class="nav-link" href="/products/login">Log In</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+        </li>-->
     </ul>
     <form class="form-inline " action="/products/search" method="POST">
         <input class="form-control mr-sm-2" type="text" name="product_name" placeholder="Search">
@@ -41,15 +35,11 @@
     </form>
 </nav>
 
-<div class="container">
-    <h2><a class="btn btn-outline-primary" href="/products/insert">Insert</a></h2>
-</div>
 
 <div class="container">
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Product</th>
             <th>Image</th>
             <th>Color</th>
@@ -60,11 +50,10 @@
         {{# each products}}
             <tbody>
             <tr>
-                <td>{{_id}}</td>
                 <td>{{product_name}}</td>
-                <td><img src="/products/photos/{{_id}}" class="rounded" alt="" width="100px"></td>
+                <td><img src="/products/photos/{{_id}}" class="rounded" alt="" height="100px" width="100px"></td>
                 <td>{{[color]}}</td>
-                <td>{{[price]}}</td>
+                <td>{{[price]}}$</td>
                 <td>
                     <a href="/products/edit?id={{_id}}" class="btn btn-outline-primary">Udpate</a>
                     <a href="/products/delete?id={{_id}}" class="btn btn-outline-danger" method="POST">Delete</a>

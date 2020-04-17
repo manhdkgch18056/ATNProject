@@ -33,7 +33,7 @@
     "multer": "^1.4.2",
     "serve-favicon": "^2.5.0"
   },
-  "main": "products.js",
+  "main": "routes/products.js",
   "author": "",
   "license": "ISC",
   "devDependencies": {
