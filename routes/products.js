@@ -41,6 +41,15 @@ router.get('/delete', async (req, res) => {
     let results = await dbo.collection("products").find({}).toArray();
     res.render('allProducts', {products: results})
 });
+router.post('/search', async (req, res) => {
+        let searchProduct = req.body.product_name;
+        console.log(searchProduct);
+        let client = await MongoClient.connect(url);
+        let dbo = client.db("ATNDatabase");
+        let results = await dbo.collection("products").find({product_name: searchProduct}).toArray();
+        res.render('allProducts', {products: results})
+    }
+);
 
 router.get('/edit', async (req, res) => {
     let id = req.query.id;
