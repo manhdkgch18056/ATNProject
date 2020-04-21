@@ -4,11 +4,17 @@ const multer = require('multer');
 fs = require('fs-extra');
 const bodyParser = require('body-parser');
 const app = express();
+const request = require('request');
 app.use(bodyParser.urlencoded({extended: true}));
 const MongoClient = require('mongodb').MongoClient;
 ObjectId = require('mongodb').ObjectId;
 
 const url = 'mongodb+srv://manhdkgch18056:DaoKhacManh00@cluster0-pyltn.mongodb.net/test?retryWrites=true&w=majority';
+MongoClient.connect(url, (err, client) => {
+    if (err) return console.log(err);
+    db = client.db('ATNDatabase')
+});
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -21,15 +27,13 @@ var storage = multer.diskStorage({
 
 var upload = multer({storage: storage});
 
-MongoClient.connect(url, (err, client) => {
-    if (err) return console.log(err);
-    db = client.db('ATNDatabase')
-});
+
 router.get('/', async (req, res) => {
     let client = await MongoClient.connect(url);
     let dbo = client.db("ATNDatabase");
     let results = await dbo.collection("products").find({}).toArray();
     res.render('allProducts', {products: results});
+
 });
 
 router.get('/delete', async (req, res) => {

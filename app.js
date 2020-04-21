@@ -15,6 +15,6 @@ app.set('view engine', 'hbs');
 var productsController = require('./routes/products.js');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
-app.use('/products', productsController);
+app.use('', productsController);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 

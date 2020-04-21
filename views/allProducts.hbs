@@ -7,62 +7,80 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Manage products</title>
 </head>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<!--BS3-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<!--BS4-->
+<!--
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
+-->
+<!--
 
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="/products"><h2><span class="fas fa-home"></span>&nbsp;</h2></a>
+            <a class="nav-link" href=""><h2><span class="fas fa-home"></span>&nbsp;</h2></a>
         </li>
         <li class="navbar-nav active"><div class="nav-link"><h2>ATN Management &nbsp;</h2></div></li> &nbsp;
         <li class="nav-item mt-lg-2">
-            <a class="btn btn-outline-secondary" href="/products/insert">Insert</a>
+            <a class="btn btn-outline-secondary" href="/insert">Insert</a>
         </li>
-<!--        <li class="nav-item">
-            <a class="nav-link" href="/products/login">Log In</a>
-        </li>-->
+        &lt;!&ndash;        <li class="nav-item">
+                    <a class="nav-link" href="/products/login">Log In</a>
+                </li>&ndash;&gt;
     </ul>
-    <form class="form-inline " action="/products/search" method="POST">
+    <form class="form-inline " action="/search" method="POST">
         <input class="form-control mr-sm-2" type="text" name="product_name" placeholder="Search">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
 </nav>
-
+-->
+<form class="form-inline " action="/search" method="POST">
+<div class="navbar navbar-default">
+    <div class="container">
+        <h2>
+            <a style="color: black" href=""><span class="glyphicon glyphicon-home col-lg-1"></span></a>
+            <span class="col-lg-8">ATN Management</span>
+            <span class="col-lg-3" ><input class="form-control " type="text" name="product_name" placeholder="Search">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search "></i></button></span>
+        </h2>
+    </div>
+</div>
+</form>
 
 <div class="container">
-    <table class="table table-bordered">
+
+    <a class="btn btn-default" href="/insert">Insert</a>
+
+    <table class="table table-bordered table-hover table-condensed">
         <thead>
         <tr>
-            <th>Product</th>
-            <th>Image</th>
-            <th>Color</th>
-            <th>Price</th>
-            <th>Action</th>
+            <th style="text-align: center">Product</th>
+            <th style="text-align: center">Image</th>
+            <th style="text-align: center">Color</th>
+            <th style="text-align: center">Price</th>
+            <th style="text-align: center">Action</th>
         </tr>
         </thead>
         {{# each products}}
             <tbody>
             <tr>
-                <td>{{product_name}}</td>
-                <td><img src="/products/photos/{{_id}}" class="rounded" alt="" height="100px" width="100px"></td>
-                <td>{{[color]}}</td>
-                <td>{{[price]}}$</td>
-                <td>
-                    <a href="/products/edit?id={{_id}}" class="btn btn-outline-primary">Udpate</a>
-                    <a href="/products/delete?id={{_id}}" class="btn btn-outline-danger" method="POST">Delete</a>
+                <td style="text-align: center"><h4>{{product_name}}</h4></td>
+                <td style="text-align: center"><img src="/photos/{{_id}}" class="rounded" alt="" height="100px" width="100px"></td>
+                <td style="text-align: center"><h4>{{[color]}}</h4></td>
+                <td style="text-align: center"><h4>{{[price]}}$</h4></td>
+                <td style="text-align: center">
+                    <a href="/edit?id={{_id}}" class="btn btn-default">Udpate</a>
+                    <a href="/delete?id={{_id}}" class="btn btn-danger" method="POST">Delete</a>
                 </td>
             </tr>
             </tbody>
         {{/each}}
     </table>
-
 </div>
 
 </body>

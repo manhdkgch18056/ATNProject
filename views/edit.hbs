@@ -19,24 +19,24 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="/products"><h2><span class="fas fa-home"></span>&nbsp;</h2></a>
+            <a class="nav-link" href=""><h2><span class="fas fa-home"></span>&nbsp;</h2></a>
         </li>
         <li class="navbar-nav active"><div class="nav-link"><h2>ATN Management &nbsp;</h2></div></li> &nbsp;
         <li class="nav-item mt-lg-2">
-            <a class="btn btn-outline-secondary" href="/products">Back</a>
+            <a class="btn btn-outline-secondary" href="/insert">Insert</a>
         </li>
         <!--        <li class="nav-item">
                     <a class="nav-link" href="/products/login">Log In</a>
                 </li>-->
     </ul>
-    <form class="form-inline " action="/products/search" method="POST">
+    <form class="form-inline " action="/search" method="POST">
         <input class="form-control mr-sm-2" type="text" name="product_name" placeholder="Search">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
 </nav>
 
 <div class="container">
-    <form action="/products/edit" enctype="multipart/form-data" method="POST">
+    <form action="/edit" enctype="multipart/form-data" method="POST">
         <div class="form-group">
             <label for="_id">ID: </label>
             <input class="form-control" type="text" name="id" readonly id="" value="{{products._id}}" >
